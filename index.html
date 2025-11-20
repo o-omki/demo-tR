@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>testRigor JS Page with Buttons</title>
+  <title>testRigor JS Page with Selectable Buttons</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
@@ -34,9 +34,14 @@
       border: 1px solid #ccc;
       cursor: pointer;
       background: #f3f3f3;
+      transition: background 0.2s;
     }
     button:hover {
       background: #e8e8e8;
+    }
+    .active {
+      background: #cce5ff !important;
+      border-color: #66b0ff;
     }
   </style>
 </head>
@@ -55,23 +60,27 @@
   </div>
 
   <script>
-    // Number of times to display the word
-    const COUNT = 5;
+    const btn1 = document.getElementById("btn1");
+    const btn2 = document.getElementById("btn2");
 
-    // Where to place the items
+    function highlight(selected, other) {
+      selected.classList.add("active");
+      other.classList.remove("active");
+    }
+
+    btn1.onclick = () => highlight(btn1, btn2);
+    btn2.onclick = () => highlight(btn2, btn1);
+
+    // Generate dynamic testRigor tags
+    const COUNT = 5;
     const container = document.getElementById("output");
 
-    // Create the elements
     for (let i = 0; i < COUNT; i++) {
       const span = document.createElement("span");
       span.className = "tag";
       span.textContent = "testRigor";
       container.appendChild(span);
     }
-
-    // Optional button behavior
-    document.getElementById("btn1").onclick = () => alert("Button 1: testRigor");
-    document.getElementById("btn2").onclick = () => alert("Button 2: testRigor");
   </script>
 </body>
 </html>
